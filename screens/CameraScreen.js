@@ -1,60 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, Button, TouchableHighlight } from 'react-native';
 import { Camera } from 'expo-camera';
 
-export default function CameraScreen() {
-
-  const [hasPermission, setHasPermission] = useState(null);
-  const [type] = useState(Camera.Constants.Type.back);
-
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
-  }, []);
-
-  if (hasPermission === null) {
-    return <View />;
-  }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
-  }
+export default class CameraScreen extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+        loading: false
+    }
+}
+  render() {
   return (
     <View style={{ flex: 1 }}>
-      <Camera style={{ flex: 1 }} type={type}>
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: 'transparent',
-            flexDirection: 'row',
-          }}>
-        </View>
+      <Camera style={{ flex: 1 }} type={Camera.Constants.Type.back}>
+    	<TouchableHighlight style={styles.captureButton}>
+        <Button
+        title="SNAP"/>
+			</TouchableHighlight>
       </Camera>
     </View>
   );
 }
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: 'black',
-  },
-  preview: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  capture: {
+  captureButton: {
     flex: 0,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    padding: 15,
-    paddingHorizontal: 20,
+		marginBottom:30,
+		width:110,
+		borderRadius:35,
+    backgroundColor: "white",
     alignSelf: 'center',
-    margin: 20,
-  },
+    margin: 50,
+    padding: 5,
+    paddingHorizontal: 20
+	}
 });
 
 CameraScreen.navigationOptions = {
