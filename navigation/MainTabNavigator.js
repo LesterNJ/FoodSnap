@@ -6,7 +6,8 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import CameraScreen from '../screens/CameraScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import SearchScreen from '../screens/SearchScreen';
+import FoodScreen from '../screens/FoodScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -21,7 +22,7 @@ const HomeStack = createStackNavigator(
 );
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+  tabBarLabel: 'Profile',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -44,35 +45,70 @@ const CameraStack = createStackNavigator(
 );
 
 CameraStack.navigationOptions = {
-  tabBarLabel: 'Camera',
+  tabBarLabel: 'Capture',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-restaurant' : 'md-restaurant'}
+    />
   ),
 };
 
 CameraStack.path = '';
 
-const SettingsStack = createStackNavigator(
+const SearchStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    Search: SearchScreen,
   },
   config
 );
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+SearchStack.navigationOptions = {
+  tabBarLabel: 'Search',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-search' : 'md-search'}
+    />
   ),
 };
 
-SettingsStack.path = '';
+SearchStack.path = '';
 
-const tabNavigator = createBottomTabNavigator({
-  HomeStack,
-  CameraStack,
-  SettingsStack,
-});
+const FoodStack = createStackNavigator(
+  {
+    Food: FoodScreen,
+  },
+  config
+);
+
+FoodStack.navigationOptions = {
+  tabBarLabel: 'Food',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+    />
+  ),
+};
+
+FoodStack.path = '';
+
+const tabNavigator = createBottomTabNavigator(
+  {
+    HomeStack,
+    CameraStack,
+    SearchStack,
+    // FoodStack
+  },
+  {
+    tabBarOptions: {
+      style: {
+        backgroundColor: 'black',
+      },
+    },
+  }
+);
 
 tabNavigator.path = '';
 
