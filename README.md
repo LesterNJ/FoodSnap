@@ -1,4 +1,4 @@
-# **Bean**
+# **FoodSnap**
 
 A mobile application for users to take pictures of their meals and identify what they are eating. The application also provides nutritional information on their meal.
 
@@ -13,6 +13,6 @@ A mobile application for users to take pictures of their meals and identify what
 FoodSnap was built using:
 
 - React Native
-- FireBase
+- Firebase
 - Google Vision API
 - USDA API
