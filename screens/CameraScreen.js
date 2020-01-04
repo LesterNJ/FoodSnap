@@ -35,11 +35,13 @@ export default class CameraScreen extends React.Component {
           detail +
           '&type=f&format=json&api_key='+Environment.USDA_API_KEY
       ).then(food => food.json());
-      this.setState({ name: name });
-      this.setState({ kcal: data.foods[0].food.nutrients[1].value });
-      this.setState({ protein: data.foods[0].food.nutrients[3].value });
-      this.setState({ fat: data.foods[0].food.nutrients[4].value });
-      this.setState({ carbs: data.foods[0].food.nutrients[6].value })
+      this.setState({
+        name: name,
+        kcal: data.foods[0].food.nutrients[1].value,
+        protein: data.foods[0].food.nutrients[3].value,
+        fat: data.foods[0].food.nutrients[4].value,
+        carbs: data.foods[0].food.nutrients[6].value
+       });
     } catch (error) {
       console.log(error);
     }
